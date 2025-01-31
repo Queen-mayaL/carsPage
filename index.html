@@ -85,25 +85,26 @@
                 cars.push({ make, model, year });
 
                 if (imageFile) {
-                    formData.append("files", imageFile);
-                } else {
-                    formData.append("files", ""); // Ensuring placeholder for empty images
+                    formData.append("files", imageFile); // ✅ Match FastAPI's `files: list[UploadFile]`
                 }
             });
 
-            formData.append("cars", JSON.stringify(cars));
+            formData.append("cars", JSON.stringify(cars)); // ✅ Ensure JSON string is sent correctly
 
             try {
-                await axios.post(`${baseURL}/cars`, formData, {
+                const response = await axios.post(`${baseURL}/cars`, formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
+
+                console.log("Response:", response.data);
                 getCars();
                 document.getElementById("add-car-form").reset();
             } catch (error) {
-                console.error("Error adding cars:", error);
+                console.error("Error adding cars:", error.response?.data || error.message);
                 alert("Failed to add cars. Check the console for details.");
             }
         }
+
 
         async function getCars() {
             try {
@@ -168,6 +169,7 @@
                 alert("Failed to update the car.");
             }
         }
+
 
         window.onload = getCars;
     </script>
