@@ -6,6 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Management</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        img {
+            max-width: 150px; /* Adjust size as needed */
+            height: auto;
+            display: block;
+            margin-top: 5px;
+        }
+
+        button {
+            display: inline-block;
+            margin: 5px 2px;
+        }
+
+        .car-entry {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+    </style>
 </head>
 
 <body>
@@ -106,7 +140,7 @@
                     carItem.setAttribute("data-id", car.id);
                     carItem.innerHTML = `
                 <strong>${car.make} ${car.model} (${car.year})</strong>
-                ${car.image_url ? `<br><img src="${baseURL}${car.image_url}" alt="Car Image" width="100">` : ''}
+                ${car.image_url ? `<br><img src="${baseURL}${car.image_url}" alt="Car Image">` : ''}
                 <br>
                 <button onclick="deleteCar(${car.id})">Delete</button>
                 <button onclick="updateCar(${car.id})">Update</button>
@@ -169,7 +203,6 @@
                 console.error("Error updating car:", error);
             }
         }
-
 
         window.onload = getCars;
     </script>
