@@ -9,7 +9,7 @@
     <style>
         img {
             max-width: 150px;
-            height: 80px; /* Fixed height value */
+            height: 80px;
             margin-left: 20px;
             border-radius: 5px;
         }
@@ -47,7 +47,7 @@
     <ul id="car-list"></ul>
 
     <script>
-        const baseURL = "https://crudcloudagain.onrender.com";
+        const baseURL = "https://crudcloudagain.onrender.com"; // Update with your API URL
 
         function addCarEntry() {
             const container = document.getElementById("car-entries");
@@ -83,10 +83,11 @@
                 const imageFile = entry.querySelector(".image").files[0];
 
                 cars.push({ make, model, year });
+
                 if (imageFile) {
                     formData.append("files", imageFile);
                 } else {
-                    formData.append("files", "");
+                    formData.append("files", ""); // Ensuring placeholder for empty images
                 }
             });
 
@@ -100,6 +101,7 @@
                 document.getElementById("add-car-form").reset();
             } catch (error) {
                 console.error("Error adding cars:", error);
+                alert("Failed to add cars. Check the console for details.");
             }
         }
 
@@ -114,16 +116,17 @@
                     const carItem = document.createElement("li");
                     carItem.setAttribute("data-id", car.id);
                     carItem.innerHTML = `
-                <strong>${car.make} ${car.model} (${car.year})</strong>
-                ${car.image_url ? `<br><img src="${baseURL}${car.image_url}" alt="Car Image">` : ''}
-                <br>
-                <button onclick="deleteCar(${car.id})">Delete</button>
-                <button onclick="updateCar(${car.id})">Update</button>
-            `;
+                        <strong>${car.make} ${car.model} (${car.year})</strong>
+                        ${car.image_url ? `<br><img src="${car.image_url}" alt="Car Image">` : ''}
+                        <br>
+                        <button onclick="deleteCar(${car.id})">Delete</button>
+                        <button onclick="updateCar(${car.id})">Update</button>
+                    `;
                     carList.appendChild(carItem);
                 });
             } catch (error) {
                 console.error("Error fetching cars:", error);
+                alert("Failed to fetch cars. Please try again.");
             }
         }
 
@@ -135,6 +138,7 @@
                 getCars();
             } catch (error) {
                 console.error("Error deleting car:", error);
+                alert("Failed to delete the car.");
             }
         }
 
@@ -161,6 +165,7 @@
                 getCars();
             } catch (error) {
                 console.error("Error updating car:", error);
+                alert("Failed to update the car.");
             }
         }
 
