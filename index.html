@@ -116,19 +116,19 @@
                     const carItem = document.createElement("li");
                     carItem.setAttribute("data-id", car.id);
                     carItem.innerHTML = `
-                        <strong>${car.make} ${car.model} (${car.year})</strong>
-                        ${car.image_url ? `<br><img src="${car.image_url}" alt="Car Image">` : ''}
-                        <br>
-                        <button onclick="deleteCar(${car.id})">Delete</button>
-                        <button onclick="updateCar(${car.id})">Update</button>
-                    `;
+                <strong>${car.make} ${car.model} (${car.year})</strong>
+                ${car.image_url ? `<br><img src="${car.image_url}" alt="Car Image">` : ''}
+                <br>
+                <button onclick="deleteCar(${car.id})">Delete</button>
+                <button onclick="updateCar(${car.id})">Update</button>
+            `;
                     carList.appendChild(carItem);
                 });
             } catch (error) {
                 console.error("Error fetching cars:", error);
-                alert("Failed to fetch cars. Please try again.");
             }
         }
+
 
         async function deleteCar(carId) {
             if (!confirm("Are you sure you want to delete this car?")) return;
